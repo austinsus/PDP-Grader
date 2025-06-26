@@ -1,6 +1,8 @@
 import os
 import logging
 import json
+from dotenv import load_dotenv
+load_dotenv()
 from flask import Flask, render_template
 from werkzeug.middleware.proxy_fix import ProxyFix
 
@@ -9,6 +11,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 # Create the Flask app
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.getenv("SESSION_SECRET")
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 # Analysis page test -- go to /test-analysis to see a premade analysis result

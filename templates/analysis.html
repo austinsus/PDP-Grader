@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results - Website Content Analyzer</title>
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h1 class="h2 mb-1">Analysis Results</h1>
+                        <p class="text-muted mb-0">
+                            <strong>URL:</strong> 
+                            <a href="{{ url }}" target="_blank" class="text-decoration-none">{{ url }}</a>
+                        </p>
+                    </div>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                        ← Analyze Another
+                    </a>
+                </div>
+
+                <!-- Overall Score Card -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body text-center p-4">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <div class="display-1 fw-bold text-primary mb-2">{{ analysis.overall_score }}</div>
+                                <p class="mb-0">Overall Score</p>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="display-3 fw-bold mb-2">{{ analysis.grade }}</div>
+                                <p class="mb-0">Grade</p>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="progress mb-2" style="height: 12px;">
+                                    <div class="progress-bar bg-primary" 
+                                         style="width: {{ analysis.overall_score }}%"></div>
+                                </div>
+                                <p class="mb-0 small">{{ analysis.overall_score }}% of 100</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">
+                        <h3 class="card-title h5 mb-0">Executive Summary</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-0">{{ analysis.summary }}</p>
+                    </div>
+                </div>
+
+                <!-- Category Scores -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">
+                        <h3 class="card-title h5 mb-0">Category Breakdown</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-4">
+                            {% for category_key, category_data in analysis.categories.items() %}
+                            <div class="col-md-6">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="mb-0">{{ category_key.replace('_', ' ').title() }}</h6>
+                                    <span class="badge bg-primary">{{ category_data.score }}/{{ 
+                                        25 if category_key == 'title_quality' 
+                                        else 25 if category_key in ['description_depth', 'bullet_point_effectiveness'] 
+                                        else 25 if category_key == 'image_alt_text_quality'
+                                        else 25 
+                                    }}</span>
+                                </div>
+                                <div class="progress mb-2" style="height: 8px;">
+                                    <div class="progress-bar" 
+                                         style="width: {{ (category_data.score / (
+                                            25 if category_key == 'title_quality' 
+                                            else 25 if category_key in ['description_depth', 'bullet_point_effectiveness'] 
+                                            else 25 if category_key == 'image_alt_text_quality'
+                                            else 25 
+                                         )) * 100 }}%"></div>
+                                </div>
+                                <p class="small text-muted mb-0">{{ category_data.feedback }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strengths and Areas for Improvement -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-success bg-opacity-10">
+                                <h3 class="card-title h5 mb-0 text-success">
+                                    ✓ Strengths
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled mb-0">
+                                    {% for strength in analysis.strengths %}
+                                    <li class="mb-2">
+                                        <span class="text-success me-2">•</span>
+                                        {{ strength }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-warning bg-opacity-10">
+                                <h3 class="card-title h5 mb-0 text-warning">
+                                    ⚠ Areas for Improvement
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled mb-0">
+                                    {% for area in analysis.areas_for_improvement %}
+                                    <li class="mb-2">
+                                        <span class="text-warning me-2">•</span>
+                                        {{ area }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-info bg-opacity-10">
+                        <h3 class="card-title h5 mb-0 text-info">
+                            💡 Recommendations
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            {% for recommendation in analysis.recommendations %}
+                            <div class="col-12">
+                                <div class="d-flex">
+                                    <span class="text-info me-3">{{ loop.index }}.</span>
+                                    <span>{{ recommendation }}</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="text-center">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg me-3">
+                        Analyze Another Website
+                    </a>
+                    <button onclick="window.print()" class="btn btn-outline-secondary btn-lg">
+                        Print Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -2,7 +2,6 @@ import logging
 from flask import render_template, request, flash, redirect, url_for
 from urllib.parse import urlparse
 from app import app
-from web_scraper import get_website_text_content
 from openai_analyzer import analyze_website_content
 
 @app.route('/')
@@ -36,16 +35,9 @@ def analyze():
         return redirect(url_for('index'))
     
     try:
-        # Scrape website content
-        logging.info(f"Scraping content from: {url}")
-        content = get_website_text_content(url)
-        
-        if not content or len(content.strip()) < 50:
-            flash('Unable to extract sufficient content from the website. Please check the URL and try again.', 'error')
-            return redirect(url_for('index'))
-        
         # Analyze content with ChatGPT
         logging.info("Analyzing content with ChatGPT")
+        content = "1"
         analysis = analyze_website_content(content, url)
         
         return render_template('analysis.html', 

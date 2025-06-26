@@ -116,6 +116,7 @@ def analyze_website_content(content: str, url: str) -> dict:
         result = json.loads(response.choices[0].message.content)
         # Save the JSON to a local file
         filename = re.sub(r'[\\/*?:"<>|&=%]', "_", url) + ".json"
+        filename = filename[:50]
         filepath = os.path.join("analysis_results", filename)  # Save in a directory named "analysis_results"
 
         # Ensure the directory exists

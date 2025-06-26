@@ -1,0 +1,46 @@
+{
+    "overall_score": 75,
+    "grade": "B",
+    "categories": {
+        "title_quality": {
+            "score": 15,
+            "feedback": "The title includes both the brand 'Monopoly' and the type of product 'Board Game', but lacks additional features or specific keywords that could enhance the search optimization."
+        },
+        "description_depth": {
+            "score": 20,
+            "feedback": "The description provides key specs and some benefits, is relatively well-structured, but could be enhanced with more persuasive language."
+        },
+        "bullet_point_effectiveness": {
+            "score": 20,
+            "feedback": "The bullet points include some unique features and benefits, but could be more concise with stronger selling points."
+        },
+        "image_alt_text_quality": {
+            "score": 20,
+            "feedback": "Multiple images are clear with different angles provided, but there's a lack of lifestyle context, though alt-text seems accurate."
+        },
+        "user_generated_content": {
+            "score": 0,
+            "feedback": "There are no reviews, Q&A, or ratings visible, which limits customer's confidence and engagement with the product page."
+        }
+    },
+    "strengths": [
+        "Includes brand and model in the title",
+        "Well-structured description with some benefits",
+        "Clear images with multiple views"
+    ],
+    "areas_for_improvement": [
+        "Enhance title with features and keywords",
+        "Include more persuasive language in the description",
+        "Add more varied and pointed bullet points",
+        "Incorporate lifestyle images",
+        "Encourage user-generated content such as reviews and Q&A"
+    ],
+    "summary": "The webpage offers a decent structure with clear images and a well-organized description but lacks comprehensive coverage of features in the title and user engagement elements like reviews and Q&A.",
+    "recommendations": [
+        "Add keyword-rich phrases and features in the title to improve searchability.",
+        "Refine and expand the description with persuasive benefits and engaging language.",
+        "Revise bullet points to highlight unique selling points and compact information.",
+        "Incorporate lifestyle images to give the product more context in use.",
+        "Encourage customer reviews and Q&A participation to enhance UGC visibility."
+    ]
+}

@@ -14,3 +14,9 @@ Go to "original link/test-analysis" to test the analysis page. Ex: if my origina
 For debugging:
 The analyses from ChatGPT are stored in .json files and are in the folder "analysis_result"s".
 The scraped webpage content is stored in the folder "extracted_text".
+
+**ISSUES TO FIX**
+Missing info from webpages
+Scraping sometimes doesn't work
+Adjust grading weight
+

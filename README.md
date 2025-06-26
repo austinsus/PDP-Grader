@@ -1,6 +1,6 @@
 This is a PDP Grader that uses ChatGPT.
 
-Before running, set an environment variable for secret key by doing $env:SESSION_SECRET = "YOUR SECRET KEY"
+Before running, set an environment variable for secret key by typing in the terminal: $env:SESSION_SECRET = "YOUR SECRET KEY"
 Run app.py and follow the link that it gives to the webpage.
 
 Enter a url. The program will scrape the webpage, give the content to ChatGPT, and ChatGPT will grade it and return a result.

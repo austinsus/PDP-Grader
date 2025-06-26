@@ -13,7 +13,7 @@ from openai import OpenAI
 # the newest OpenAI model is "gpt-4o" which was released May 13, 2024.
 # do not change this unless explicitly requested by the user
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-print("OPENAI_API_KEY:", repr(OPENAI_API_KEY))
+
 
 openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
@@ -106,13 +106,13 @@ def analyze_website_content(content: str, url: str) -> dict:
                 },
                 {
                     "role": "user",
-                    "content": f"Please analyze this website content from {url}:\n\n{content[:8000]}"  # Limit content to avoid token limits
+                    "content": f"Please analyze this website content from {url}"  # Limit content to avoid token limits
                 }
             ],
             response_format={"type": "json_object"},
             max_tokens=2000
         )
-        
+        #"Please analyze this website content from {url}:\n\n{content[:8000]}
         result = json.loads(response.choices[0].message.content)
         # Save the JSON to a local file
         filename = re.sub(r'[\\/*?:"<>|&=%]', "_", url) + ".json"
